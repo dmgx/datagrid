@@ -14,7 +14,7 @@ class Datagrid::Filters::DateFilter < Datagrid::Filters::BaseFilter
   def format(value)
     return nil if value.blank?
     return value if value.is_a?(Range)
-    return value.to_date if value.respond_to?(:to_date)
+    return Date.strptime(value, "%m-%d-%Y") if value.respond_to?(:to_date)
     return value unless value.is_a?(String)
     #TODO: more smart date normalizer
     Date.parse(value)
